@@ -1,5 +1,5 @@
 # visitas.js
-Basic Node.js dashboard for logs analysis
+Simple Node.js dashboard for clf logs analysis, with logging capabilities.
 
 ## Demo images
 ![Visitas demo 1](https://raw.githubusercontent.com/reneses/visitas.js/master/demo/demo-1.png)
