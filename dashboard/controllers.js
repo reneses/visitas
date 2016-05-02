@@ -6,8 +6,7 @@ angular
             $http
                 .get('api/analysis')
                 .then(function (response) {
-                    console.log('Analysis refreshed');
-                    var analysis = response.data
+                    $scope.analysis = response.data
                         .map(function (a) {
                             var date = new Date(a.date);
                             a.date = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes();
@@ -21,34 +20,32 @@ angular
                             });
                             return a;
                         });
-                    $scope.analysis = analysis;
                     if (callback)
                         callback();
                 });
-        }
+        };
 
         $scope.process = function () {
             $scope.isProcessing = true;
             $http
                 .get('api/process')
-                .then(function (response) {
+                .then(function () {
                     refreshAnalysis(function () {
                         $scope.isProcessing = false;
                     })
                 });
-        }
+        };
 
         var init = function () {
             $scope.analysis = [];
             refreshAnalysis();
-        }
+        };
         init();
 
 
     }])
-    .service('PieChartService', function () {
-
-        this.defaultConfig = {
+    .controller('OsCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.chartConfig = {
             options: {
                 chart: {
                     plotBackgroundColor: null,
@@ -89,57 +86,10 @@ angular
             }],
             loading: true
         };
-    })
-    .service('LineChartService', function () {
-        this.defaultConfig = {
-            title: {
-                text: null
-            },
-            yAxis: [
-                {
-                    title: {text: ""},
-                    //labels: {
-                    //    style: {color: '#ffc838'}
-                    //},
-                    //opposite: true,
-                    allowDecimals: false
-                    //startOnTick: false,
-                    //endOnTick: false
-                }, {
-                    title: {text: ""},
-                    //labels: {
-                    //    style: {color: '#ffc838'}
-                    //},
-                    opposite: true,
-                    allowDecimals: false
-                    //startOnTick: false,
-                    //endOnTick: false
-                }
-            ],
-            series: [
-                {
-                    name: 'Hits',
-                    type: 'line',
-                    yAxis: 0
-                    //color: '#ffc838'
-                }, {
-                    name: 'Visits',
-                    type: 'line',
-                    yAxis: 1
-                    //color: '#ffc838'
-                }
-            ],
-            loading: true
-        };
-    })
-    .controller('OsCtrl', ['$scope', '$http', 'PieChartService', function ($scope, $http, PieChart) {
-        $scope.chartConfig = PieChart.defaultConfig;
         var init = function () {
             $http
                 .get('api/logs/os')
-                .then(
-                    // Success
-                    function (response) {
+                .then(function (response) {
                         var data = response.data;
                         var total = 0;
                         data = data
@@ -154,11 +104,9 @@ angular
                                 os.y = Math.floor(os.y / total * 100) / 100;
                                 return os;
                             });
-                        console.log(data);
 
                         // Update chart
                         var chart = $scope.chartConfig.getHighcharts();
-                        chart.setTitle({text: 'Operating Systems'});
                         chart.series[0].setData(data);
                         chart.series.name = 'Operating Systems';
                         chart.hideLoading();
@@ -169,8 +117,34 @@ angular
         init();
 
     }])
-    .controller('VisitsCtrl', ['$scope', '$http', 'LineChartService', function ($scope, $http, LineChart) {
-        $scope.chartConfig = LineChart.defaultConfig;
+    .controller('VisitsCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.chartConfig = {
+            title: {
+                text: null
+            },
+            yAxis: [
+                {
+                    title: {text: ""},
+                    allowDecimals: false
+                }, {
+                    title: {text: ""},
+                    opposite: true,
+                    allowDecimals: false
+                }
+            ],
+            series: [
+                {
+                    name: 'Hits',
+                    type: 'line',
+                    yAxis: 0
+                }, {
+                    name: 'Visits',
+                    type: 'line',
+                    yAxis: 1
+                }
+            ],
+            loading: true
+        };
         var init = function () {
             $http
                 .get('api/logs/date')
@@ -188,10 +162,8 @@ angular
                             })
                         });
                     });
-                    console.log(dates, visits);
 
                     var chart = $scope.chartConfig.getHighcharts();
-
 
                     // X Axis
                     chart.xAxis[0].setCategories(dates);
@@ -221,9 +193,6 @@ angular
 
                     var chart = $scope.chartConfig.getHighcharts();
 
-                    // Title
-
-
                     // Update data
                     chart.series[1].setData(visits);
 
@@ -237,14 +206,52 @@ angular
         init();
 
     }])
-    .controller('BrowserCtrl', ['$scope', '$http', 'PieChartService', function ($scope, $http, PieChart) {
-        $scope.chartConfig = PieChart.defaultConfig;
+    .controller('BrowserCtrl', ['$scope', '$http', function ($scope, $http) {
+        $scope.chartConfig = {
+            options: {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        },
+                        showInLegend: true
+                    }
+                },
+                tooltip: {
+                    shared: true,
+                    formatter: function () {
+                        var per = Math.floor(this.point.percentage * 100) / 100;
+                        return this.point.name + ': <b>' + per + '%</b>';
+                    },
+                    useHtml: true
+                }
+            },
+            title: {
+                text: ''
+            },
+            series: [{
+                name: 'Operating Systems',
+                colorByPoint: true,
+                data: []
+            }],
+            loading: true
+        };
         var init = function () {
             $http
                 .get('api/logs/browser')
-                .then(
-                    // Success
-                    function (response) {
+                .then(function (response) {
                         var data = response.data;
                         var total = 0;
                         data = data
@@ -259,11 +266,9 @@ angular
                                 os.y = Math.floor(os.y / total * 100) / 100;
                                 return os;
                             });
-                        console.log(data);
 
                         // Update chart
                         var chart = $scope.chartConfig.getHighcharts();
-                        chart.setTitle({text: 'Browsers'});
                         chart.series[0].setData(data);
                         chart.series.name = 'Browsers';
                         chart.hideLoading();
@@ -274,7 +279,7 @@ angular
         init();
 
     }])
-    .controller('ResourcesCtrl', ['$scope', '$http', 'PieChartService', function ($scope, $http, PieChart) {
+    .controller('ResourcesCtrl', ['$scope', '$http', function ($scope, $http) {
         var init = function () {
             $http
                 .get('api/resources')
