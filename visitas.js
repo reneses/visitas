@@ -52,8 +52,8 @@ var useLogger = function (opt) {
  *                  - log (boolean/object) [default true]
  *                      - filename (string): Filename prefix for the logs
  *                      - rotation (boolean): Use daily rotation
- *          - directory (string): Directory for the logs
- *          - dashboard (boolean/string): Dashboard endpoint
+ *                  - directory (string): Directory for the logs
+ *                  - dashboard (boolean/string): Dashboard endpoint
  * @returns {Function}
  * @constructor
  */
