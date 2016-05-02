@@ -73,7 +73,7 @@ var Api = function(logsDirectory, mongo) {
         });
     };
     var groupLogsbyBrowser = function (response) {
-        logRepository.groupLogsbyBrowser(function (logs) {
+        logRepository.groupLogsByBrowser(function (logs) {
             response.send(logs);
         });
     };
@@ -122,7 +122,7 @@ var Api = function(logsDirectory, mongo) {
 
             // Logs by browser
             case 'api/logs/browser':
-                getLogsByBrowser(response);
+                groupLogsbyBrowser(response);
                 return true;
 
             // Group by date
