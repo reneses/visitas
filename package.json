@@ -1,7 +1,7 @@
 {
   "name": "visitas",
   "description" : "Simple Node.js dashboard for clf logs analysis, with logging capabilities.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Alvaro Reneses <alvaroreneses@gmail.com> (http://reneses.io)",
   "repository" : {"type": "git", "url": "git://github.com/reneses/visitas.git"},
   "keywords" : ["logs", "dashboard", "webstats", "analysis", "apache", "clf"],

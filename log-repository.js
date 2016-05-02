@@ -47,6 +47,7 @@ var LogRepository = function (host, port, db, user, pass) {
         getLogCollection('analysis', function (collection) {
             collection
                 .find({})
+                .sort( { date: -1 } )
                 .toArray(function (err, docs) {
                     callback(docs);
                 });
