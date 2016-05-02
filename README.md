@@ -1,6 +1,11 @@
 # visitas.js
 Basic Node.js dashboard for logs analysis
 
+## Demo images
+![Visitas demo 1](https://raw.githubusercontent.com/reneses/visitas.js/master/demo/demo-1.png)
+![Visitas demo 2](https://raw.githubusercontent.com/reneses/visitas.js/master/demo/demo-2.png)
+![Visitas demo 3](https://raw.githubusercontent.com/reneses/visitas.js/master/demo/demo-3.png)
+
 ## Requirements
 - `Node`
 - `npm`
