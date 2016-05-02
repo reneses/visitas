@@ -3,9 +3,13 @@ var MongoClient = require('mongodb').MongoClient;
 /**
  * Log repository
  *
- * @param url Mongo URL
  * @returns LogRepository
  * @constructor
+ * @param host
+ * @param port
+ * @param db
+ * @param user
+ * @param pass
  */
 var LogRepository = function (host, port, db, user, pass) {
 
