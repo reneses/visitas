@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Resources with more hits</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-5">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">Filter path</div>
+                <input type="text" class="form-control" id="exampleInputAmount" placeholder="style.css"
+                       ng-model="pathFilter._id">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Path</th>
+                <th>Hits</th>
+                <th>Average size</th>
+                <th>Total size</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="resource in resources | filter:pathFilter">
+                <td>{{$index + 1}}</td>
+                <td>{{resource._id}}</td>
+                <td>{{resource.count}}</td>
+                <td>{{resource.averageSize | number: 0}}</td>
+                <td>{{resource.totalSize}}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+

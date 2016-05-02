@@ -1,0 +1,28 @@
+{
+  "name": "dexter",
+  "description": "",
+  "main": "dexter.js",
+  "authors": [
+    "Álvaro Reneses <alvaroreneses@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dashboard/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "angular-route": "^1.5.3",
+    "highcharts": "^4.2.4",
+    "highcharts-ng": "^0.0.11",
+    "bootstrap": "~3.3.6",
+    "font-awesome": "~4.2.0",
+    "metisMenu": "~1.1.3"
+  }
+}
