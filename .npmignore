@@ -2,3 +2,4 @@ log
 dashboard/components
 *.log
 demo
+.idea

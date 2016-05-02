@@ -1,3 +1,4 @@
 log
 dashboard/components
 *.log
+.idea
