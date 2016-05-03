@@ -1,5 +1,5 @@
 angular
-    .module('dexter', ['ngRoute', 'highcharts-ng'])
+    .module('visitas', ['ngRoute', 'highcharts-ng'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/', {
