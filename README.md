@@ -1,6 +1,14 @@
 # visitas.js
 Simple Node.js dashboard for clf logs analysis, with logging capabilities.
 
+Developed by [Álvaro Reneses](http://www.reneses.io).
+
+## Disclaimer
+
+This repository is an autonomous assignment part of the **Advanced Web Publishing Apps** module offered by the [CIT](http://www.cit.ie). The original specifications of the assignment are included in the `assignment.pdf` file.
+
+Due to the time limitations of the assignment and the guidelines it had to follow, this repository should be used as a sample or proof of concept, rather than for production purposes.
+
 ## Demo images
 ![Visitas demo 1](https://raw.githubusercontent.com/reneses/visitas.js/master/demo/demo-1.png)
 ![Visitas demo 2](https://raw.githubusercontent.com/reneses/visitas.js/master/demo/demo-2.png)
