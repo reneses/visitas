@@ -3,3 +3,4 @@ dashboard/components
 *.log
 demo
 .idea
+*.pdf
